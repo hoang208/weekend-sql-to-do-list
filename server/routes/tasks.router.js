@@ -19,14 +19,18 @@ tasksRouter.get('/', (req, res) => {
 tasksRouter.post('/',  (req, res) => {
     let newTask = req.body;
     let task = req.body.task;
-    let isComplete = req.body.isComplete
+    let isComplete = req.body.isComplete;
+    let dateAdded = req.body.task.dateAdded;
+    let timeAdded = req.body.task.timeAdded;
+    let dateCompleted = req.body.task.dateCompleted;
+    let timeCompleted = req.body.task.timeCompleted
 
     console.log(`Adding task`, newTask);
   
-    let queryText = `INSERT INTO "tasks" ("task", "isComplete")
-                     VALUES ($1, $2);`;
+    let queryText = `INSERT INTO "tasks" ("task", "isComplete", "dateAdded", "timeAdded", "dateComplered", "timeComplered")
+                     VALUES ($1, $2, $3, $4, $5, $6);`;
 
-    pool.query(queryText, [task,isComplete])
+    pool.query(queryText, [task,isComplete, dateAdded, timeAdded, dateCompleted, timeCompleted])
       .then(result => {
         res.sendStatus(201);
       }).catch(error => {
@@ -38,12 +42,18 @@ tasksRouter.post('/',  (req, res) => {
 //PUT
 tasksRouter.put('/:id', (req, res) => {
   let idToUpdate = req.params.id;
+  let newDateCompleted = req.body.dateCompleted;
+  let newTimeCompleted = req.body.timeCompleted;
+
+  console.log(newDateCompleted)
 
   let mySqlQuery = `
-  UPDATE "tasks" SET "isComplete" = true WHERE id = $1;
+  UPDATE "tasks" SET "isComplete" = true, "dateCompleted" = $2, "timeCompleted" = $3 WHERE id = $1;
   `;
 
-  pool.query(mySqlQuery, [idToUpdate])
+  console.log (mySqlQuery)
+
+  pool.query(mySqlQuery, [idToUpdate, newDateCompleted, newTimeCompleted])
       .then(response => {
               console.log("Update request successful", idToUpdate);
               res.sendStatus(200);
