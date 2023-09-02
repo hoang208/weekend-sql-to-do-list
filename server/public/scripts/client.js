@@ -8,8 +8,9 @@ $(document).ready( function(){
 // end doc ready
 
 function setupClickListeners() {
-    $( '#new-todo-submit' ).on( 'click', addTask);
-    $('#todocontainer').on('click', '.complete-button', completeTask)
+    $('#new-todo-submit').on('click', addTask);
+    $('#todocontainer').on('click', '.complete-button', completeTask);
+    $('#todocontainer').on('click', '.delete-button', deleteTask)
   };
 //end setupClickListeners
 
@@ -20,12 +21,12 @@ function getTasks() {
     $.ajax({
         type: 'GET',
         url: '/tasks'
-    }).then(function(response) {
-        console.log(response);
-        renderTasks(response);
-    }).catch(function(error){
-        console.log('error in GET', error);
-    });
+        }).then(response => {
+            console.log(response);
+            renderTasks(response);
+        }).catch(error => {
+            console.log('error in GET', error);
+        })
 };
 // end getTasks
 
@@ -85,14 +86,14 @@ function addTask(event) {
             type: 'POST',
             url: '/tasks',
             data: newTask,
-            }).then(function(response) {
-            console.log('Response from server.', response);
-            getTasks();
-            $('#new-todo-input').val('')
-            }).catch(function(error) {
-            console.log('Error in POST', error)
-            alert('Unable to add task at this time. Please try again later.');
-            });
+            }).then(response => {
+                console.log('Response from server.', response);
+                getTasks();
+                $('#new-todo-input').val('')
+            }).catch(error => {
+                console.log('Error in POST', error)
+                alert('Unable to add task at this time. Please try again later.');
+            })
     } else {
         alert("Please input a to-do item.")
     }
@@ -110,17 +111,29 @@ function completeTask() {
         method: 'PUT',
         url: `/tasks/${idToUpdate}`,
         data: idToUpdate
-    }).then(
-        (response) => {
-            console.log("update task worked, task id:", idToUpdate);
-            getTasks();
-            $(this).addClass("complete");
-            $(this).parent().parent().addClass("complete");
-            $(this).parent().next().children('.todoitem').addClass("complete");
-        }
-    ).catch(
-        (error) => {
+        }).then(response => {
+                console.log("update task worked, task id:", idToUpdate);
+                getTasks();
+                $(this).addClass("complete");
+                $(this).parent().parent().addClass("complete");
+                $(this).parent().next().children('.todoitem').addClass("complete");
+        }).catch(error => {
             alert('Error on updating task:', error);
-        }
-    )
+        })
+}
+
+//DELETE
+function deleteTask() {
+    console.log('in deleteTask');
+    let idToDelete = $(this).parent().parent().data('id');
+
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${idToDelete}` // We pass the id to the server in url as a url parameter
+        }).then(results => {
+                console.log('delete successful, this to-do no longer exists: ', idToDelete);
+                getTasks();
+        }).catch(error => {
+            alert("Error on delete, id:", idToDelete);
+        })
 }
