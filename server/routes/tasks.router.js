@@ -29,11 +29,30 @@ tasksRouter.post('/',  (req, res) => {
     pool.query(queryText, [task,isComplete])
       .then(result => {
         res.sendStatus(201);
-      })
-      .catch(error => {
+      }).catch(error => {
         console.log(`Error adding new task`, error);
         res.sendStatus(500);
       });
   });
 
-  module.exports = tasksRouter;
+//PUT
+tasksRouter.put('/:id', (req, res) => {
+  let idToUpdate = req.params.id;
+
+  let mySqlQuery = `
+  UPDATE "tasks" SET "isComplete" = true WHERE id = $1;
+  `;
+
+  pool.query(mySqlQuery, [idToUpdate])
+      .then(
+          (response) => {
+              console.log("Update request successful", idToUpdate);
+              res.sendStatus(200);
+          }).catch(error => {
+              console.log(`Update request failed: ${idToUpdate}`, error);
+              res.sendStatus(500);
+          }
+      )
+})
+
+module.exports = tasksRouter;
