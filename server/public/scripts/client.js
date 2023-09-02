@@ -9,6 +9,7 @@ $(document).ready( function(){
 
 function setupClickListeners() {
     $( '#new-todo-submit' ).on( 'click', addTask);
+    $('#todocontainer').on('click', '.complete-button', completeTask)
   };
 //end setupClickListeners
 
@@ -30,7 +31,7 @@ function getTasks() {
 
 //RENDER
 function renderTasks(tasks) {
-    console.log("tasks rendered")
+    console.log("in renderTasks")
     $('#todocontainer').empty();
 
     //Append based on if task is complete or note
@@ -53,7 +54,7 @@ function renderTasks(tasks) {
             let $newToDo=$(`
                  <div class="todo complete">
                     <div class="todoitem complete">
-                        <p>c${task.task}</p>
+                        <p>${task.task}</p>
                     </div>
                     <div class="buttons">
                         <button class="complete-button complete">Complete</button>
@@ -79,10 +80,10 @@ function addTask(event) {
     };
 
     //ajax call to server to send task
-    if (newTask.name) {
+    if (newTask.task) {
         $.ajax({
             type: 'POST',
-            url: '/koalas',
+            url: '/tasks',
             data: newTask,
             }).then(function(response) {
             console.log('Response from server.', response);
@@ -97,3 +98,29 @@ function addTask(event) {
     }
 };
 //end addTask
+
+
+//PUT
+function completeTask() {
+    console.log('in updateTask');
+    let idToUpdate=$(this).parent().parent().data('id');
+
+    //ajax call to server to update
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/${idToUpdate}`,
+        data: idToUpdate
+    }).then(
+        (response) => {
+            console.log("update task worked, task id:", idToUpdate);
+            getTasks();
+            $(this).addClass("complete");
+            $(this).parent().parent().addClass("complete");
+            $(this).parent().next().children('.todoitem').addClass("complete");
+        }
+    ).catch(
+        (error) => {
+            alert('Error on updating task:', error);
+        }
+    )
+}
