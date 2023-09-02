@@ -15,22 +15,35 @@
 <body>
     <header>
         <h1>To-Do List</h1>
-        <form id=""to-do-form">
+        <form id="to-do-form">
             <input type="text" id="new-todo-input" placeholder="What do you need to do?">
             <button id="new-todo-submit">Add</button>
         </form>
     </header>
     <main>
         <section class="todo-list">
-            <h2>To-Do</h2>
-            <div id="todo">
-                <!-- What I want to append -->
-                <div class="todoitem">
-                    <p>Insert to-do item</p>
+            <h2>Reminders</h2>
+            <div id="todocontainer">
+                 <!-- What I want to append -->
+                 <!-- Non-complete item -->
+                <div class="todo">
+                    <div class="todoitem">
+                        <p>on-complete to-do item</p>
+                    </div>
+                    <div class="buttons">
+                        <button class="complete-button">Complete</button>
+                        <button class="delete-button">Delete</button>
+                    </div>
                 </div>
-                <div class="buttons">
-                    <button class="complete-button">Complete</button>
-                    <button class="delete-button">Delete</button>
+                <!-- Completed item -->
+                <div class="todo complete">
+                    <div class="todoitem complete">
+                        <p>completed to-do item</p>
+                    </div>
+                    <div class="buttons">
+                        <button class="complete-button complete">Complete</button>
+                        <button class="delete-button">Delete</button>
+                    </div>
                 </div>
             </div>
         </section>
