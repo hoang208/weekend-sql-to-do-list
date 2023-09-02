@@ -20,14 +20,15 @@ tasksRouter.post('/',  (req, res) => {
     let newTask = req.body;
     let task = req.body.task;
     let isComplete = req.body.isComplete;
-    let dateAdded = req.body.task.dateAdded;
-    let timeAdded = req.body.task.timeAdded;
-    let dateCompleted = req.body.task.dateCompleted;
-    let timeCompleted = req.body.task.timeCompleted
+    let dateAdded = req.body.dateAdded;
+    let timeAdded = req.body.timeAdded;
+    let dateCompleted = req.body.dateCompleted;
+    let timeCompleted = req.body.timeCompleted
 
+    console.log(typeof(dateAdded));
     console.log(`Adding task`, newTask);
   
-    let queryText = `INSERT INTO "tasks" ("task", "isComplete", "dateAdded", "timeAdded", "dateComplered", "timeComplered")
+    let queryText = `INSERT INTO "tasks" ("task", "isComplete", "dateAdded", "timeAdded", "dateCompleted", "timeCompleted")
                      VALUES ($1, $2, $3, $4, $5, $6);`;
 
     pool.query(queryText, [task,isComplete, dateAdded, timeAdded, dateCompleted, timeCompleted])
