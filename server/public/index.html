@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <!-- jquery -->
+    <script src="vendors/jquery.js"></script>
+    <!-- client -->
+    <script src="scripts/client.js" charset="utf-8"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="./styles/style.css">
+
+</head>
+<body>
+    <header>
+        <h1>To-Do List</h1>
+        <form id=""to-do-form">
+            <input type="text" id="new-todo-input" placeholder="What do you need to do?">
+            <button id="new-todo-submit">Add</button>
+        </form>
+    </header>
+    <main>
+        <section class="todo-list">
+            <h2>To-Do</h2>
+            <div id="todo">
+                <!-- What I want to append -->
+                <div class="todoitem">
+                    <p>Insert to-do item</p>
+                </div>
+                <div class="buttons">
+                    <button class="complete-button">Complete</button>
+                    <button class="delete-button">Delete</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
