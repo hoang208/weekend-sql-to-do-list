@@ -6,6 +6,7 @@ $(document).ready( function(){
   getTasks();
   getTime();
 }); 
+
 // end doc ready
 
 //update time
@@ -102,10 +103,10 @@ function addTask(event) {
                 $('#new-todo-input').val('')
             }).catch(error => {
                 console.log('Error in POST', error)
-                alert('Unable to add task at this time. Please try again later.');
+                swal('Unable to add task at this time. Please try again later.');
             })
     } else {
-        alert("Please input a to-do item.")
+        swal("Please input a to-do item.")
     }
 };
 //end addTask
@@ -132,7 +133,7 @@ function completeTask() {
             $(this).parent().parent().addClass("complete");
             $(this).parent().next().children('.todoitem').addClass("complete");
         }).catch(error => {
-            alert('Error on updating task:', error);
+            swal('Error on updating task:', error);
         })
 };
 //end completeTask
@@ -140,17 +141,31 @@ function completeTask() {
 //DELETE
 function deleteTask() {
     console.log('in deleteTask');
-    let idToDelete = $(this).parent().parent().data('id');
-
-    $.ajax({
-        method: 'DELETE',
-        url: `/tasks/${idToDelete}` // We pass the id to the server in url as a url parameter
-        }).then(results => {
-            console.log('delete successful, this to-do no longer exists: ', idToDelete);
-            getTasks();
-        }).catch(error => {
-            alert("Error on delete, id:", idToDelete);
-        })
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this task!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }) .then((willDelete) => {
+        if (willDelete) {
+            let idToDelete = $(this).parent().parent().data('id');
+            $.ajax({
+                method: 'DELETE',
+                url: `/tasks/${idToDelete}` // We pass the id to the server in url as a url parameter
+                }).then(results => {
+                    console.log('delete successful, this to-do no longer exists: ', idToDelete);
+                    getTasks();
+                }).catch(error => {
+                    swal("Error on delete, id:", idToDelete);
+                })
+          swal("Your task has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your task is safe!");
+        }
+    });
 };
 //end deleteTask
 
