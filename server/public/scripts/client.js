@@ -46,7 +46,7 @@ function renderTasks(tasks) {
             let $newToDo=$(`
                  <div class="todo">
                     <div class="todoitem">
-                        <h5><del>${task.task}</del></h5>
+                        <h5>${task.task}</h5>
                         <small class="text-body-secondary">Added on ${task.dateAdded} at ${task.timeAdded}</small>
                     </div>
                     <div class="buttons">
