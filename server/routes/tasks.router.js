@@ -69,7 +69,6 @@ tasksRouter.put('/:id', (req, res) => {
 
 tasksRouter.delete('/:id', (req, res) => {
   let idToDelete = req.params.id;
-
   let mySqlQuery = `
   DELETE FROM "tasks" WHERE id = $1;
   `

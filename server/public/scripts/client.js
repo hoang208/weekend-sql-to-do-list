@@ -62,7 +62,7 @@ function renderTasks(tasks) {
                  <div class="todo complete">
                     <div class="todoitem complete">
                         <h5><del>${task.task}</del></h5>
-                        <small class="text-body-secondary">Completed on ${task.dateCompleted} at ${task.timeCompleted}</smalln>
+                        <small class="text-body-secondary">Completed on ${task.dateCompleted} at ${task.timeCompleted}</small>
                     </div>
                     <div class="buttons">
                         <button class="complete-button complete btn btn-outline-success">Complete</button>
@@ -150,6 +150,7 @@ function deleteTask() {
       }) .then((willDelete) => {
         if (willDelete) {
             let idToDelete = $(this).parent().parent().data('id');
+            console.log(idToDelete)
             $.ajax({
                 method: 'DELETE',
                 url: `/tasks/${idToDelete}` // We pass the id to the server in url as a url parameter
