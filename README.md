@@ -1,33 +1,23 @@
-
-
-
-
-
-![REPO SIZE](https://img.shields.io/github/repo-size/blakesmithmn/weekend-sql-to-do-list?style=flat-square)
-![TOP_LANGUAGE](https://img.shields.io/github/languages/top/blakesmithmn/weekend-sql-to-do-list?style=flat-square)
-![FORKS](https://img.shields.io/github/forks/blakesmithmn/weekend-sql-to-do-list?style=social)
-
-
 # Full Stack To-Do List:
 
 ## Description
 
 _Duration: 18 hour Sprint_
 
-Over the course of a weekend - we were tasked with creating a functional full-stack web based application - letting users create and maintain a To-Do list. 
+Over the course of a weekend, the goal was to create a functional full-stack web based application. The web based application allow users to create and maintain a To-Do list. 
 
 
 ## Screen Shots
 Preview:
 ![](demo.png)
 
+GIF showing application features:
+![](demo.gif)
+
 
 ## Description & Approach
 
-
-As I continue to develop my personal workflow - I am trying to get into the habit of breaking down the complexity of the project at hand. One way I do this is by making a visual To-Do list / Flow Chart for me to follow. (like the one above). 
-In this particular assignment - I also gave myself the goal of setting a clear design concept from the start - which streamlined the front-end process of the work!
-
+In order to tackle all the requirements for this project, I created a step-by-step plan that I felt best could fulfill all the requirements in the project. Additionally, each step could represent a branch that I could merge into the main once I have completed the necessary task. I also created a flowchart that allowed me to view the full scope of what I needed to create.
 ![](concept.png)
 
 
@@ -41,22 +31,20 @@ In this particular assignment - I also gave myself the goal of setting a clear d
 
 ## Installation
 1. Clone this repository for your own access.
-2. Open up your editor of choice and run an `npm install`
-3. Using your preferred database manager - use the provided SQL file to set up the database that tracks your tasks and their status. 
-4. Run `npm run server` in your terminal
+2. Open up your editor of choice and run `npm install`
+3. Using your preferred database manager. Use the provided SQL file to set up the database as well as insert dummy data if needed. 
+4. Run `npm start` in your terminal.
 5. Navigate to http://localhost:5000/
 
 ## Usage
-This web application is meant to assist the user in keeping their tasks organized:
- 1. Using the provided inputs - enter your goal / task
- 3. Provide notes if you find it necessary
- 4. Pressing the submit button adds your input to the "to-do" list
- 5. Using the buttons provided - users can mark a task as "complete" or delete it entirely.
- 6. Get stuff done in an organized fashion!
-
-## Developer Notes
-
-Given some more time - or If I were to revisit this project ... I would really like to continue to develop the design theme. I would also like to include feedback showing users how many tasks they have completed - as well as timestamps for task completion.
+This web application is meant to assist the user by creating a to-do list:
+ 1. Using the provided input field, enter the task needed to add the to-do list.
+ 2. Using the add button will add the task and the current date and time to the to-do list.
+ 3. Using the complete button, the user can mark a task as completed as well as record the date and time the task was completed.
+ 4. Using the delete button, the user can delete any task that they no longer need on the to-do list.
 
 ## Acknowledgement
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality.
+
+## Support
+If you have suggestions or issues, please email me at [paulhoanglong@gmail.com](www.google.com)
