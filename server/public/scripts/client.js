@@ -1,7 +1,7 @@
-console.log( 'js' );
+// console.log( 'js' );
 
 $(document).ready( function(){
-  console.log( 'JQ' );
+//   console.log( 'JQ' );
   setupClickListeners();
   getTasks();
   getTime();
@@ -21,7 +21,7 @@ function setupClickListeners() {
 
 //GET
 function getTasks() {
-    console.log( 'in getTasks' );
+    // console.log( 'in getTasks' );
     // ajax call to server to get tasks
     $.ajax({
         type: 'GET',
@@ -37,7 +37,7 @@ function getTasks() {
 
 //RENDER
 function renderTasks(tasks) {
-    console.log("in renderTasks")
+    // console.log("in renderTasks")
     $('#todocontainer').empty();
 
     //Append based on if task is complete or note
@@ -46,12 +46,12 @@ function renderTasks(tasks) {
             let $newToDo=$(`
                  <div class="todo">
                     <div class="todoitem">
-                        <p>${task.task}</p>
-                        <span>Added on ${task.dateAdded} at ${task.timeAdded}
+                        <h5><del>${task.task}</del></h5>
+                        <small class="text-body-secondary">Added on ${task.dateAdded} at ${task.timeAdded}</small>
                     </div>
                     <div class="buttons">
-                        <button class="complete-button">Complete</button>
-                        <button class="delete-button">Delete</button>
+                        <button class="complete-button btn btn-outline-success">Complete</button>
+                        <button class="delete-button btn btn-outline-danger">Delete</button>
                     </div>
                 </div>
             `);
@@ -61,12 +61,12 @@ function renderTasks(tasks) {
             let $newToDo=$(`
                  <div class="todo complete">
                     <div class="todoitem complete">
-                        <p>${task.task}</p>
-                        <span>Completed on ${task.dateCompleted} at ${task.timeCompleted}</span>
+                        <h5><del>${task.task}</del></h5>
+                        <small class="text-body-secondary">Completed on ${task.dateCompleted} at ${task.timeCompleted}</smalln>
                     </div>
                     <div class="buttons">
-                        <button class="complete-button complete">Complete</button>
-                        <button class="delete-button">Delete</button>
+                        <button class="complete-button complete btn btn-outline-success">Complete</button>
+                        <button class="delete-button btn btn-outline-danger">Delete</button>
                     </div>
                 </div>
             `);
@@ -80,7 +80,7 @@ function renderTasks(tasks) {
 //POST
 function addTask(event) {
     event.preventDefault();
-    console.log( 'in addTask');
+    // console.log( 'in addTask');
 
     let newTask = {
         task: $('#new-todo-input').val(),
@@ -114,7 +114,7 @@ function addTask(event) {
 
 //PUT
 function completeTask() {
-    console.log('in updateTask');
+    // console.log('in updateTask');
     let idToUpdate=$(this).parent().parent().data('id');
 
     let dateToUpdate= {
@@ -140,7 +140,7 @@ function completeTask() {
 
 //DELETE
 function deleteTask() {
-    console.log('in deleteTask');
+    // console.log('in deleteTask');
     swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this task!",
@@ -171,12 +171,12 @@ function deleteTask() {
 
 //get current date and time
 function getTime() {
-    console.log('in getTime')
+    // console.log('in getTime')
     let date = new Date();
     let currentDate=((date.toLocaleString('en-US', {year: "2-digit", month: "2-digit", day: "2-digit"})));
     let currentTime=((date.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true })))
-    console.log(currentDate);
-    console.log(currentTime);
+    // console.log(currentDate);
+    // console.log(currentTime);
     $('#date').text(currentDate)
     $('#time').text(currentTime)
 };
