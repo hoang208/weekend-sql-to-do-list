@@ -1,5 +1,6 @@
 const pg = require('pg');
 let pool;
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
 if (process.env.DATABASE_URL) {
     pool = new pg.Pool({
@@ -10,10 +11,14 @@ if (process.env.DATABASE_URL) {
     });
 } else {
     pool = new pg.Pool({
-        host: 'localhost',
+        host: PGHOST,
         port: 5432,
-        database: 'weekend-to-do-app', 
-    });
+        database: PGDATABASE,
+        user: PGUSER,
+        password: PGPASSWORD,
+        ssl: {
+            rejectUnauthorized: false
+        }});
 }
 
 module.exports = pool;
